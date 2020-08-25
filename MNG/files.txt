@@ -1,0 +1,3 @@
+bot.js: contain the code
+config.json: contain the prefix for the commands and the token
+package-lock.json: information on the package
