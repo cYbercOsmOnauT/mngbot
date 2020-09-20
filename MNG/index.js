@@ -6,7 +6,7 @@
  * @since Sep. 2020
  * @licence GNU GPL v3.0
  *
- * Copyright (C) 2002  Tekin Birdüzen
+ * Copyright (C) 2020  Tekin Birdüzen
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
