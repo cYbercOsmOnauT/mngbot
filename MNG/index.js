@@ -25,6 +25,7 @@
 // Set the requirements and constants
 require("dotenv").config();
 const FS = require("fs");
+const PATH = require("path");
 const DISCORD = require("discord.js");
 const PREFIX = process.env.PREFIX;
 const TOKEN = process.env.TOKEN;
@@ -50,11 +51,13 @@ BOT.on("ready", () => {
 
 BOT.on("message", msg => {
   // Does the message start with our prefix?
-  if (PREFIX !== msg.content.substr(0,1)) {
+  if (PREFIX !== msg.content.substr(0, PREFIX.length)) {
     // No, so do nothing
     return;
   }
   const args = msg.content.split(/ +/);
+  // Remove the Prefix (like !mng)
+  args.shift();
   const command = args.shift().toLowerCase();
   console.info(`Called command: ${command}`);
 
