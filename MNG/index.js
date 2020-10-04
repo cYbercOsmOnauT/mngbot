@@ -24,14 +24,15 @@
 
 // Set the requirements and constants
 require("dotenv").config();
-const FS = require("fs");
-const PATH = require("path");
+FS = require("fs");
+PATH = require("path");
 const DISCORD = require("discord.js");
 const PREFIX = process.env.PREFIX;
 const TOKEN = process.env.TOKEN;
 
-const BOT = new DISCORD.Client();
+BOT = new DISCORD.Client();
 BOT.commands = new DISCORD.Collection();
+BOT.internal = new DISCORD.Collection();
 const BOTCOMMANDS = require("./commands");
 const INTERNAL = require("./internal");
 

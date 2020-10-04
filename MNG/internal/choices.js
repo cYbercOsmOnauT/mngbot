@@ -1,5 +1,5 @@
 module.exports = {
-    name: 'choicess',
+    name: 'choices',
     description: 'Calls to find choices',
     getChoicesImages(_season, _chapter, _part) {
 
@@ -12,9 +12,5 @@ module.exports = {
         // Find the file
         let _file = BOT.internal.get("fs").getChoiceFile(_zSeason, _zChapter, _zPart);
 
-    },
-    execute(msg, args) {
-        msg.reply('pong');
-        msg.channel.send('pong');
     },
 };
