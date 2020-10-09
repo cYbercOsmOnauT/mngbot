@@ -56,19 +56,18 @@ BOT.on("message", msg => {
     // No, so do nothing
     return;
   }
-  const args = msg.content.split(/ +/);
-  // Remove the Prefix (like !mng)
-  args.shift();
-  const command = args.shift().toLowerCase();
-  console.info(`Called command: ${command}`);
+  const commandline = BOT.internal.get("data").parseCommandline(msg.content);
 
-  if (!BOT.commands.has(command)) {
-    // Unknown command
+  if ("undefined" !== typeof commandline.error) {
+    // There was an error
+    // Send error message to view
     return;
   }
 
+  const command = args.shift().toLowerCase();
+  console.info(`Called command: ${command}`);
   try {
-    BOT.commands.get(command).execute(msg, args);
+    BOT.commands.get(command).execute(commandline);
   } catch (error) {
     console.error(error);
     msg.reply("Hmm, I got an error. I am sorry!");
