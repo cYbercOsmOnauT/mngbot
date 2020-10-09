@@ -61,10 +61,59 @@ module.exports = {
                     _season = _slice.substr(1);
                 }
                 // Only digits are allowed as season (or with a .5 at the end)
-                if (!/\d+(\.5)?$/.exec(_season)) {
-                    return {"error": "Mistyped season number"};
+                if (!/\d+(\.5)?$/.test(_season)) {
+                    return {"error": "Mistyped Season number"};
                 }
+                _commandline.season = _season;
+            }
+            else if ("-chapter" === _slice || /^C/i.exec(_slice)) {
+                // Chapter argument found
+                // Was chapter already set?
+                if ("undefined" !== typeof _commandline.chapter) {
+                    return {"error": "Set Chapter several times"};
+                }
+                // All fine let's grab the Chapter number
+                let _chapter = 0;
+                if ("-season" === _slice) {
+                    _chapter = _parts.shift();
+                }
+                else {
+                    // Short form was used. Just cut off the S at the start
+                    _chapter = _slice.substr(1);
+                }
+                // Only digits are allowed as season (or with a .5 at the end)
+                if (!/\d+$/.test(_chapter)) {
+                    return {"error": "Mistyped Chapter number"};
+                }
+                _commandline.chapter = _chapter;
+            }
+            else if ("-part" === _slice || /^P/i.exec(_slice)) {
+                // Part argument found
+                // Was part already set?
+                if ("undefined" !== typeof _commandline.part) {
+                    return {"error": "Set Chapter several times"};
+                }
+                // All fine let's grab the part number
+                let _part = 0;
+                if ("-season" === _slice) {
+                    _part = _parts.shift();
+                }
+                else {
+                    // Short form was used. Just cut off the S at the start
+                    _part = _slice.substr(1);
+                }
+                // Only digits are allowed as season (or with a .5 at the end)
+                if (!/\d+$/.test(_part)) {
+                    return {"error": "Mistyped Part number"};
+                }
+                _commandline.part = _part;
+            }
+            else {
+                // Nothing that we recognize
+                return {"error": "Unknown argument"};
             }
         }
+        // Return the object of arguments
+        return _commandline;
     }
 };
