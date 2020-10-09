@@ -27,7 +27,7 @@ require("dotenv").config();
 FS = require("fs");
 PATH = require("path");
 const DISCORD = require("discord.js");
-const PREFIX = process.env.PREFIX;
+
 const TOKEN = process.env.TOKEN;
 
 BOT = new DISCORD.Client();
@@ -52,7 +52,7 @@ BOT.on("ready", () => {
 
 BOT.on("message", msg => {
   // Does the message start with our prefix?
-  if (PREFIX !== msg.content.substr(0, PREFIX.length)) {
+  if (!BOT.internal.get("data").isBotTriggered(msg.content)) {
     // No, so do nothing
     return;
   }
