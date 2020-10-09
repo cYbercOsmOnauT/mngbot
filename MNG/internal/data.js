@@ -44,6 +44,11 @@ module.exports = {
             // Grab the next part
             let _slice = _parts.shift();
 
+            // Empty slice? (The last can be one)
+            if (!_slice.length) {
+                continue;
+            }
+
             // We parse through all possible arguments
             if ("-season" === _slice || /^S/i.exec(_slice)) {
                 // Season argument found
@@ -91,7 +96,7 @@ module.exports = {
                 // Part argument found
                 // Was part already set?
                 if ("undefined" !== typeof _commandline.part) {
-                    return {"error": "Set Chapter several times"};
+                    return {"error": "Set Part several times"};
                 }
                 // All fine let's grab the part number
                 let _part = 0;
