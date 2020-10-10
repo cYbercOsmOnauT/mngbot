@@ -64,7 +64,7 @@ BOT.on("message", msg => {
     return;
   }
 
-  const command = args.shift().toLowerCase();
+  const command = commandline.command.toLowerCase();
   console.info(`Called command: ${command}`);
   try {
     BOT.commands.get(command).execute(commandline);
