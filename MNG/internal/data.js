@@ -22,7 +22,36 @@ module.exports = {
      * @returns {object}
      */
     parseCommandline(_line) {
-        const _parts = _line.split(/ +/);
+        // RegEx splitter code taken from regex101.com and adjusted
+        const _regex = /".*?"|\S+/g;
+        const parts = new Array();
+        let _hit;
+
+        while ((_hit = _regex.exec(_line)) !== null) {
+            // This is necessary to avoid infinite loops with zero-width matches
+            if (_hit.index === _regex.lastIndex) {
+                _regex.lastIndex++;
+                continue;
+            }
+            // First of all let's get  rid of the " at the left and right (if there are any)
+            if ('"' === _hit[0].substr(0,1)) {
+                _hit[0] = _hit[0].substr(1);
+            }
+            if ('"' === _hit[0].substring(-1)) {
+                _hit[0] = _hit[0].substring(0, _hit[0].length-1);
+            }
+            // Trim the whitespace left and right
+            _hit[0] = _hit[0].trim();
+
+            // Is there anything left in the string?
+            if (!_hit[0].length) {
+                // No
+                continue;
+            }
+            // Push it into our commandline parts
+            _parts.push(_hit[0]);
+        }
+
         // The object where we will fill in our commandline
         const _commandline = {};
         // We don't need the trigger
