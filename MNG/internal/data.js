@@ -23,8 +23,8 @@ module.exports = {
      */
     parseCommandline(_line) {
         // RegEx splitter code taken from regex101.com and adjusted
-        const _regex = /".*?"|\S+/g;
-        const parts = new Array();
+        const _regex = new RegExp("\".*?\"|\\S+", "g");
+        const _parts = new Array();
         let _hit;
 
         while ((_hit = _regex.exec(_line)) !== null) {
