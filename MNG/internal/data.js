@@ -33,12 +33,10 @@ module.exports = {
                 _regex.lastIndex++;
                 continue;
             }
-            // First of all let's get  rid of the " at the left and right (if there are any)
-            if ('"' === _hit[0].substr(0,1)) {
-                _hit[0] = _hit[0].substr(1);
-            }
-            if ('"' === _hit[0].substring(-1)) {
-                _hit[0] = _hit[0].substring(0, _hit[0].length-1);
+            // First of all let's get  rid of the " at the left and right (if it's surrounded by quotes)
+            if (/^".*"$/.test(_hit[0])) {
+                // Cut the quotes from the edges out
+                _hit[0] = _hit[0].substring(1, _hit[0].length-1);
             }
             // Trim the whitespace left and right
             _hit[0] = _hit[0].trim();
