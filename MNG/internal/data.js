@@ -14,7 +14,7 @@ module.exports = {
      */
     isBotTriggered(_line) {
         const PREFIX = process.env.PREFIX;
-        return (PREFIX + " " !== msg.content.substr(0, PREFIX.length + 1));
+        return (PREFIX + " " !== _line.substr(0, PREFIX.length));
     },
     /**
      * Splits the commandline into parts and put's everything into an object
@@ -24,7 +24,7 @@ module.exports = {
     parseCommandline(_line) {
         // RegEx splitter code taken from regex101.com and adjusted
         const _regex = new RegExp("\".*?\"|\\S+", "g");
-        const _parts = new Array();
+        const _parts = [];
         let _hit;
 
         while ((_hit = _regex.exec(_line)) !== null) {
@@ -58,7 +58,7 @@ module.exports = {
         // First part needs to be the command
         // We check if the command is known
         const _command = _parts.shift();
-        if (!Bot.commands.has(_command)) {
+        if (!BOT.commands.has(_command)) {
             // Unknown command
             return {"error": "Unknown command **" + _command + "**"};
         }
@@ -70,7 +70,7 @@ module.exports = {
         while (_parts.length) {
             // Grab the next part
             let _slice = _parts.shift();
-
+            console.log(_slice);
             // Empty slice? (The last can be one)
             if (!_slice.length) {
                 continue;
@@ -106,7 +106,7 @@ module.exports = {
                 }
                 // All fine let's grab the Chapter number
                 let _chapter = 0;
-                if ("-season" === _slice) {
+                if ("-chapter" === _slice) {
                     _chapter = _parts.shift();
                 }
                 else {
@@ -127,7 +127,7 @@ module.exports = {
                 }
                 // All fine let's grab the part number
                 let _part = 0;
-                if ("-season" === _slice) {
+                if ("-part" === _slice) {
                     _part = _parts.shift();
                 }
                 else {
@@ -145,6 +145,7 @@ module.exports = {
                 return {"error": "Unknown argument"};
             }
         }
+        console.log(_commandline);
         // Return the object of arguments
         return _commandline;
     }

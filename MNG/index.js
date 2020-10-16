@@ -37,39 +37,40 @@ const BOTCOMMANDS = require("./commands");
 const INTERNAL = require("./internal");
 
 // Load bot commands
-Object.keys(BOTCOMMANDS).map(key => {
-  BOT.commands.set(BOTCOMMANDS[key].name, BOTCOMMANDS[key]);
+Object.keys(BOTCOMMANDS).map(_key => {
+  BOT.commands.set(BOTCOMMANDS[_key].name, BOTCOMMANDS[_key]);
 });
 BOT.login(TOKEN);
 // Load internal methods
-Object.keys(INTERNAL).map(key => {
-  BOT.internal.set(INTERNAL[key].name, INTERNAL[key]);
+Object.keys(INTERNAL).map(_key => {
+  BOT.internal.set(INTERNAL[_key].name, INTERNAL[_key]);
 });
 
 BOT.on("ready", () => {
   console.info(`Logged in as ${BOT.user.tag}!`);
 });
 
-BOT.on("message", msg => {
+BOT.on("message", _msg => {
   // Does the message start with our prefix?
-  if (!BOT.internal.get("data").isBotTriggered(msg.content)) {
+  if (!BOT.internal.get("data").isBotTriggered(_msg.content)) {
     // No, so do nothing
     return;
   }
-  const commandline = BOT.internal.get("data").parseCommandline(msg.content);
 
-  if ("undefined" !== typeof commandline.error) {
+  const _commandline = BOT.internal.get("data").parseCommandline(_msg.content);
+
+  if ("undefined" !== typeof _commandline.error) {
     // There was an error
     // Send error message to view
     return;
   }
 
-  const command = commandline.command.toLowerCase();
+  const command = _commandline.command.toLowerCase();
   console.info(`Called command: ${command}`);
   try {
-    BOT.commands.get(command).execute(commandline);
+    BOT.commands.get(command).execute(_msg, _commandline);
   } catch (error) {
     console.error(error);
-    msg.reply("Hmm, I got an error. I am sorry!");
+    _msg.reply("Hmm, I got an error. I am sorry!");
   }
 });
