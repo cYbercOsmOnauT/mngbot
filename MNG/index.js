@@ -51,8 +51,8 @@ BOT.on("ready", () => {
 });
 
 BOT.on("message", _msg => {
-  // Does the message start with our prefix?
-  if (!BOT.internal.get("data").isBotTriggered(_msg.content)) {
+  // Does the message start with our prefix and also not from a Bot?
+  if (_msg.author.bot || !BOT.internal.get("data").isBotTriggered(_msg.content)) {
     // No, so do nothing
     return;
   }
