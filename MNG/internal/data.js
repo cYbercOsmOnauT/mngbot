@@ -70,10 +70,20 @@ module.exports = {
         while (_parts.length) {
             // Grab the next part
             let _slice = _parts.shift();
-            console.log(_slice);
+
             // Empty slice? (The last can be one)
             if (!_slice.length) {
                 continue;
+            }
+
+            // Arguments can start with - or -- plus letters
+            if(/^--?[a-z]+$/i.test(_slice)) {
+                // Let's get rid of the - at the start
+                while ("-" === _slice.substr(0, 1)) {
+                    _slice = _slice.substr(1);
+                }
+                let _argumentName = _slice;
+                _commandline[_argumentName] = _parts.shift();
             }
 
             // We parse through all possible arguments
