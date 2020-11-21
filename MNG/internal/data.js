@@ -87,7 +87,7 @@ module.exports = {
             }
 
             // We parse through all possible arguments
-            if ("-season" === _slice || /^S/i.exec(_slice)) {
+            if ("season" === _slice || /^S/i.exec(_slice)) {
                 // Season argument found
                 // Was season already set?
                 if ("undefined" !== typeof _commandline.season) {
@@ -95,7 +95,7 @@ module.exports = {
                 }
                 // All fine let's grab the season number
                 let _season = 0;
-                if ("-season" === _slice) {
+                if ("season" === _slice) {
                     _season = _parts.shift();
                 }
                 else {
@@ -108,7 +108,7 @@ module.exports = {
                 }
                 _commandline.season = _season;
             }
-            else if ("-chapter" === _slice || /^C/i.exec(_slice)) {
+            else if ("chapter" === _slice || /^C/i.exec(_slice)) {
                 // Chapter argument found
                 // Was chapter already set?
                 if ("undefined" !== typeof _commandline.chapter) {
@@ -116,7 +116,7 @@ module.exports = {
                 }
                 // All fine let's grab the Chapter number
                 let _chapter = 0;
-                if ("-chapter" === _slice) {
+                if ("chapter" === _slice) {
                     _chapter = _parts.shift();
                 }
                 else {
@@ -129,7 +129,7 @@ module.exports = {
                 }
                 _commandline.chapter = _chapter;
             }
-            else if ("-part" === _slice || /^P/i.exec(_slice)) {
+            else if ("part" === _slice || /^P/i.exec(_slice)) {
                 // Part argument found
                 // Was part already set?
                 if ("undefined" !== typeof _commandline.part) {
@@ -137,7 +137,7 @@ module.exports = {
                 }
                 // All fine let's grab the part number
                 let _part = 0;
-                if ("-part" === _slice) {
+                if ("part" === _slice) {
                     _part = _parts.shift();
                 }
                 else {

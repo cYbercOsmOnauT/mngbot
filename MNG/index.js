@@ -21,16 +21,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+"use strict";
 
 // Set the requirements and constants
 require("dotenv").config();
-FS = require("fs");
-PATH = require("path");
+var FS = require("fs");
+var PATH = require("path");
 const DISCORD = require("discord.js");
 
 const TOKEN = process.env.TOKEN;
 
-BOT = new DISCORD.Client();
+var BOT = new DISCORD.Client();
 BOT.commands = new DISCORD.Collection();
 BOT.internal = new DISCORD.Collection();
 const BOTCOMMANDS = require("./commands");

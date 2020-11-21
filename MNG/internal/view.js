@@ -9,7 +9,7 @@ module.exports = {
     getTemplate(_name) {
         switch (_name) {
             case "error":
-                return "**ERROR:** {{message}}";
+                return {"text": "**ERROR:** {{message}}"};
             default:
                 return false;
         }
