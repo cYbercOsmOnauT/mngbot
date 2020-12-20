@@ -1,8 +1,12 @@
 module.exports = {
     name: 'choices',
     description: 'Calls to find choices',
-    getChoicesImages(_season, _chapter, _part) {
-        let _image = BOT.internal.get("fs").getChoicesImage(_season, _chapter, _part);
+    getChoicesImages(_commandline) {
+        let _season = "undefined" === typeof _commandline.season ? 0 : _commandline.season;
+        let _chapter = "undefined" === typeof _commandline.chapter ? 0 : _commandline.chapter;
+        let _part = "undefined" === typeof _commandline.part ? 0 : _commandline.part;
+
+        let _image = this.search(_season, _chapter, _part);
         if (!_image) {
             // nothing found
             return false;

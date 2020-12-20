@@ -27,6 +27,7 @@
 require("dotenv").config();
 var FS = require("fs");
 var PATH = require("path");
+var SCHEDULE = require("node-schedule");
 const DISCORD = require("discord.js");
 
 const TOKEN = process.env.TOKEN;
