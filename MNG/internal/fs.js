@@ -1,9 +1,20 @@
+const PATH = require("path");
+const FS = require("fs");
 module.exports = {
     name: 'filesystem',
     description: 'Filesystem calls',
-    choicesDir: PATH.resolve("../choices"),
+    write(_path, _data) {
+        // Security
+        if (0 === _path.indexOf('/') || -1 !== _path.indexOf('..')) {
+            return false;
+        }
+        FS.writeFile(_path, _data);
+    },
     getChoicesDir() {
-        return this.choicesDir;
+        return PATH.resolve("../choices");
+    },
+    getCacheDir() {
+        return PATH.resolve("../cache");
     },
     getChoiceFile(_season, _chapter = 0, _part = 0) {
         let _searchstring = this.createChoiceFilename(_season, _chapter, _part);
@@ -24,9 +35,5 @@ module.exports = {
         _chapter = parseInt(_chapter);
         _part = parseInt(_part);
         return "^" + _season + "-" + _chapter + "-" + _part + "\.png$";
-    },
-    execute(msg, args) {
-        msg.reply('pong');
-        msg.channel.send('pong');
-    },
+    }
 };

@@ -14,14 +14,15 @@ module.exports = {
      */
     isBotTriggered(_line) {
         const PREFIX = process.env.PREFIX;
-        return (PREFIX + " " !== _line.substr(0, PREFIX.length));
+        return (PREFIX + " " === _line.substr(0, PREFIX.length + 1));
     },
     /**
      * Splits the commandline into parts and put's everything into an object
+     * @param BOT
      * @param _line
      * @returns {object}
      */
-    parseCommandline(_line) {
+    parseCommandline(BOT, _line) {
         // RegEx splitter code taken from regex101.com and adjusted
         const _regex = new RegExp("\".*?\"|\\S+", "g");
         const _parts = [];
@@ -36,7 +37,7 @@ module.exports = {
             // First of all let's get  rid of the " at the left and right (if it's surrounded by quotes)
             if (/^".*"$/.test(_hit[0])) {
                 // Cut the quotes from the edges out
-                _hit[0] = _hit[0].substring(1, _hit[0].length-1);
+                _hit[0] = _hit[0].substring(1, _hit[0].length - 1);
             }
             // Trim the whitespace left and right
             _hit[0] = _hit[0].trim();
@@ -66,6 +67,9 @@ module.exports = {
         // Command known so let's fill the object
         _commandline.command = _command;
 
+        // for all slices
+        _commandline.slices = [];
+
         // Let's go through the parts
         while (_parts.length) {
             // Grab the next part
@@ -77,7 +81,7 @@ module.exports = {
             }
 
             // Arguments can start with - or -- plus letters
-            if(/^--?[a-z]+$/i.test(_slice)) {
+            if (/^--?[a-z]+$/i.test(_slice)) {
                 // Let's get rid of the - at the start
                 while ("-" === _slice.substr(0, 1)) {
                     _slice = _slice.substr(1);
@@ -87,7 +91,7 @@ module.exports = {
             }
 
             // We parse through all possible arguments
-            if ("season" === _slice || /^S/i.exec(_slice)) {
+            if ("season" === _slice || /^S\d+/i.exec(_slice)) {
                 // Season argument found
                 // Was season already set?
                 if ("undefined" !== typeof _commandline.season) {
@@ -97,8 +101,7 @@ module.exports = {
                 let _season = 0;
                 if ("season" === _slice) {
                     _season = _parts.shift();
-                }
-                else {
+                } else {
                     // Short form was used. Just cut off the S at the start
                     _season = _slice.substr(1);
                 }
@@ -107,8 +110,8 @@ module.exports = {
                     return {"error": "Mistyped Season number"};
                 }
                 _commandline.season = _season;
-            }
-            else if ("chapter" === _slice || /^C/i.exec(_slice)) {
+                _commandline.slices.push("season", _season);
+            } else if ("chapter" === _slice || /^C\d+/i.exec(_slice)) {
                 // Chapter argument found
                 // Was chapter already set?
                 if ("undefined" !== typeof _commandline.chapter) {
@@ -118,8 +121,7 @@ module.exports = {
                 let _chapter = 0;
                 if ("chapter" === _slice) {
                     _chapter = _parts.shift();
-                }
-                else {
+                } else {
                     // Short form was used. Just cut off the S at the start
                     _chapter = _slice.substr(1);
                 }
@@ -128,8 +130,8 @@ module.exports = {
                     return {"error": "Mistyped Chapter number"};
                 }
                 _commandline.chapter = _chapter;
-            }
-            else if ("part" === _slice || /^P/i.exec(_slice)) {
+                _commandline.slices.push("chapter", _chapter);
+            } else if ("part" === _slice || /^P\d+/i.exec(_slice)) {
                 // Part argument found
                 // Was part already set?
                 if ("undefined" !== typeof _commandline.part) {
@@ -139,8 +141,7 @@ module.exports = {
                 let _part = 0;
                 if ("part" === _slice) {
                     _part = _parts.shift();
-                }
-                else {
+                } else {
                     // Short form was used. Just cut off the S at the start
                     _part = _slice.substr(1);
                 }
@@ -149,10 +150,10 @@ module.exports = {
                     return {"error": "Mistyped Part number"};
                 }
                 _commandline.part = _part;
-            }
-            else {
+                _commandline.slices.push("part", _part);
+            } else {
                 // Nothing that we recognize
-                return {"error": "Unknown argument"};
+                _commandline.slices.push(_slice);
             }
         }
         console.log(_commandline);

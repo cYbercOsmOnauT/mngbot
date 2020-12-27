@@ -25,8 +25,6 @@
 
 // Set the requirements and constants
 require("dotenv").config();
-var FS = require("fs");
-var PATH = require("path");
 var SCHEDULE = require("node-schedule");
 const DISCORD = require("discord.js");
 
@@ -59,8 +57,8 @@ BOT.on("message", _msg => {
     return;
   }
 
-  const _commandline = BOT.internal.get("data").parseCommandline(_msg.content);
-
+  const _commandline = BOT.internal.get("data").parseCommandline(BOT, _msg.content);
+console.log(_commandline);
   if ("undefined" !== typeof _commandline.error) {
     // There was an error
     // Send error message to view

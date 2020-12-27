@@ -1,4 +1,5 @@
 module.exports = {
   ping: require("./ping"),
-  choices: require("./choices")
+  choices: require("./choices"),
+  var: require("./var")
 };

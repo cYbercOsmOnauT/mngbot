@@ -1,3 +1,5 @@
+const AXIOS = require('axios');
+
 module.exports = {
     name: "http",
     description: "Internet requests",
