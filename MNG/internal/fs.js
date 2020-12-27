@@ -3,12 +3,28 @@ const FS = require("fs");
 module.exports = {
     name: 'filesystem',
     description: 'Filesystem calls',
-    write(_path, _data) {
+    /**
+     * Checks if the path is absolut or has .. in it for security
+     * @param _path
+     * @returns {boolean}
+     */
+    checkPath(_path) {
         // Security
         if (0 === _path.indexOf('/') || -1 !== _path.indexOf('..')) {
             return false;
         }
+    },
+    write(_path, _data) {
+        if (!this.checkPath(_path)) {
+            return false;
+        }
         FS.writeFile(_path, _data);
+    },
+    read(_path) {
+        if (!this.checkPath(_path)) {
+            return false;
+        }
+        return FS.readFileSync(_path);
     },
     getChoicesDir() {
         return PATH.resolve("../choices");
