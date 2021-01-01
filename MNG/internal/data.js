@@ -156,7 +156,6 @@ module.exports = {
                 _commandline.slices.push(_slice);
             }
         }
-        console.log(_commandline);
         // Return the object of arguments
         return _commandline;
     }

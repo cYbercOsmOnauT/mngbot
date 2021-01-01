@@ -18,5 +18,8 @@ Module for all kinds of data manipulation like parsing an entered line.
 ### fs
 Filesystem module.
 
+### http
+Web request module.
+
 ### view
 Module for Bot responses.

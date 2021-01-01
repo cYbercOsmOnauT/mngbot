@@ -58,7 +58,7 @@ BOT.on("message", _msg => {
   }
 
   const _commandline = BOT.internal.get("data").parseCommandline(BOT, _msg.content);
-console.log(_commandline);
+
   if ("undefined" !== typeof _commandline.error) {
     // There was an error
     // Send error message to view
@@ -68,7 +68,7 @@ console.log(_commandline);
   const command = _commandline.command.toLowerCase();
   console.info(`Called command: ${command}`);
   try {
-    BOT.commands.get(command).execute(_msg, _commandline);
+    BOT.commands.get(command).execute(_msg, _commandline, BOT, _msg);
   } catch (error) {
     console.error(error);
     _msg.reply("Hmm, I got an error. I am sorry!");

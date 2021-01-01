@@ -17,7 +17,7 @@ module.exports = {
             .then(function (_response) {
                 _callback({
                     statusCode: _response.statusCode,
-                    body: _body
+                    body: _response.body
                 });
             });
     },
@@ -32,7 +32,7 @@ module.exports = {
             .then(function (_response) {
             _callback({
                 statusCode: _response.statusCode,
-                body: _body
+                body: _response.body
             });
         });
     }
