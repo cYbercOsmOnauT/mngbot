@@ -68,7 +68,7 @@ BOT.on("message", _msg => {
   const command = _commandline.command.toLowerCase();
   console.info(`Called command: ${command}`);
   try {
-    BOT.commands.get(command).execute(_msg, _commandline, BOT, _msg);
+    BOT.commands.get(command).execute(_msg, _commandline, BOT);
   } catch (error) {
     console.error(error);
     _msg.reply("Hmm, I got an error. I am sorry!");

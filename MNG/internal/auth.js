@@ -6,18 +6,18 @@ const NORM = 0;
 module.exports = {
     name: 'auth',
     description: 'Authentication module',
-    owner: 'x5c0d3#1085',
+    owner: '266898040260919297',
     /**
      *
-     * @param _user Userid
+     * @param _id Userid
      * @returns {number} Access level
      */
-    getAuth(_user) {
-        if (this.owner === _user) {
+    getAuth(_id) {
+        if (this.owner === _id) {
             return ADMIN;
         }
     },
     isAdmin(_user) {
-        return ADMIN === this.getAuth(_user);
+        return ADMIN === this.getAuth(_user.id);
     }
 }
