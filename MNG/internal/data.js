@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 module.exports = {
     name: 'data',
     description: 'Module for data manupilation',
@@ -9,12 +11,16 @@ module.exports = {
     },
     /**
      * Return bool to show if the bot was triggered
-     * @param _line (Commandline)
+     * @param _msg Commandline object
      * @returns {boolean}
      */
-    isBotTriggered(_line) {
+    isBotTriggered(_msg) {
+        if (_msg.author.bot) {
+            // We do not react on bots!
+            return false;
+        }
         const PREFIX = process.env.PREFIX;
-        return (PREFIX + " " === _line.substr(0, PREFIX.length + 1));
+        return (PREFIX + " " === _msg.content.substr(0, PREFIX.length + 1));
     },
     /**
      * Splits the commandline into parts and put's everything into an object

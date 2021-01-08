@@ -1,0 +1,29 @@
+{
+  "type": "embed",
+  "content": {
+    "description": "Discord Version of Moe! Ninja Saibot",
+    "url": "https://discord.gg/UdVaY6E",
+    "color": 12763842,
+    "footer": {
+      "icon_url": "https://i.imgur.com/0grVkOG.png",
+      "text": "Saibot"
+    },
+    "thumbnail": {
+      "url": "https://i.imgur.com/0grVkOG.png"
+    },
+    "image": {
+      "url": "https://rpg.ninjagirls.moe/_nuxt/img/069dfec.webp"
+    },
+    "author": {
+      "name": "Moe! Ninja Saibot mk2",
+      "url": "https://discord.gg/UdVaY6E",
+      "icon_url": "https://i.imgur.com/0grVkOG.png"
+    },
+    "fields": [
+      {
+        "name": "Sai",
+        "value": "I wanna be your waifu someday, onii-chan!"
+      }
+    ]
+  }
+}

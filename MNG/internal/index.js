@@ -1,8 +1,9 @@
 module.exports = {
+  auth: require("./auth"),
+  bot: require("./bot"),
   choices: require("./choices"),
   data: require("./data"),
-  http: require("./http"),
   fs: require("./fs"),
-  view: require("./view"),
-  auth: require("./auth")
+  http: require("./http"),
+  view: require("./view")
 };

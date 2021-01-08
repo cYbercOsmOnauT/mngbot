@@ -24,13 +24,9 @@
 "use strict";
 
 // Set the requirements and constants
-require("dotenv").config();
 var SCHEDULE = require("node-schedule");
 const DISCORD = require("discord.js");
-
-const TOKEN = process.env.TOKEN;
-
-var BOT = new DISCORD.Client();
+const BOT = new DISCORD.Client();
 BOT.commands = new DISCORD.Collection();
 BOT.internal = new DISCORD.Collection();
 const BOTCOMMANDS = require("./commands");
@@ -40,37 +36,10 @@ const INTERNAL = require("./internal");
 Object.keys(BOTCOMMANDS).map(_key => {
   BOT.commands.set(BOTCOMMANDS[_key].name, BOTCOMMANDS[_key]);
 });
-BOT.login(TOKEN);
 // Load internal methods
 Object.keys(INTERNAL).map(_key => {
   BOT.internal.set(INTERNAL[_key].name, INTERNAL[_key]);
 });
 
-BOT.on("ready", () => {
-  console.info(`Logged in as ${BOT.user.tag}!`);
-});
-
-BOT.on("message", _msg => {
-  // Does the message start with our prefix and also not from a Bot?
-  if (_msg.author.bot || !BOT.internal.get("data").isBotTriggered(_msg.content)) {
-    // No, so do nothing
-    return;
-  }
-
-  const _commandline = BOT.internal.get("data").parseCommandline(BOT, _msg.content);
-
-  if ("undefined" !== typeof _commandline.error) {
-    // There was an error
-    // Send error message to view
-    return;
-  }
-
-  const command = _commandline.command.toLowerCase();
-  console.info(`Called command: ${command}`);
-  try {
-    BOT.commands.get(command).execute(_msg, _commandline, BOT);
-  } catch (error) {
-    console.error(error);
-    _msg.reply("Hmm, I got an error. I am sorry!");
-  }
-});
+// Bot class takes over from here
+BOT.internal.get("bot").init(BOT);
