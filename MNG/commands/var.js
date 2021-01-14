@@ -22,8 +22,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-const AUTH = require("../internal/auth");
-
 class Var {
     get name() {
         return "var";
@@ -37,7 +35,7 @@ class Var {
         if (!BOT.internal.get("auth").isAdmin(_msg.author)) {
             console.log(_msg.author);
         }
-        let _subcommand = _commandline.slices.push();
+        let _subcommand = _commandline.slices.shift();
     }
 }
 

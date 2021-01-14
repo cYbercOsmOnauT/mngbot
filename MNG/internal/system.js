@@ -1,5 +1,5 @@
 /**
- * Authentication Module
+ * System Module
  *
  * @author Tekin Birdüzen aka x5c0d3 aka Natsu DragonKnee <x5c0d3@gmail.com>
  * @version 1.0.0
@@ -22,55 +22,35 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-const FS = require("./fs");
-
-class Auth {
-    // Constants
-    static get ADMIN() {
-        return 2;
-    }
-
-    static get MOD() {
-        return 1;
-    }
-
-    static get NORM() {
-        return 0;
-    }
-
+class SYSTEM {
     get name() {
-        return "auth";
+        return "system";
     }
-
     get description() {
-        return "Authentication module";
-    }
-
-    static get owner() {
-        return "266898040260919297";
+        return "Class for system calls";
     }
 
     /**
-     * Check the access authentication of a userid
-     *
-     * @param _id Userid
-     * @returns {number} Access level
+     * Restarting the bot
      */
-    getAuth(_id) {
-        if (Auth.owner === _id) {
-            return Auth.ADMIN;
-        }
+    restart () {
+        setTimeout(function () {
+            process.on("exit", function () {
+                require("child_process").spawn(process.argv.shift(), process.argv, {
+                    cwd: process.cwd(),
+                    detached : true,
+                    stdio: "inherit"
+                });
+            });
+            process.exit();
+        }, 1000);
     }
 
-    /**
-     * Check if userid is an admin
-     *
-     * @param _user
-     * @returns {boolean} isAdmin
-     */
-    isAdmin(_user) {
-        return Auth.ADMIN === this.getAuth(_user.id);
+    shutdown() {
+        setTimeout(function() {
+            process.exit(1);
+        }, 1000);
     }
 }
 
-module.exports = new Auth();
+module.exports = new SYSTEM();

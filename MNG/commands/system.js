@@ -1,5 +1,5 @@
 /**
- * Authentication Module
+ * System commands Module
  *
  * @author Tekin Birdüzen aka x5c0d3 aka Natsu DragonKnee <x5c0d3@gmail.com>
  * @version 1.0.0
@@ -22,55 +22,37 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-const FS = require("./fs");
-
-class Auth {
-    // Constants
-    static get ADMIN() {
-        return 2;
-    }
-
-    static get MOD() {
-        return 1;
-    }
-
-    static get NORM() {
-        return 0;
-    }
-
+class SysCommands {
     get name() {
-        return "auth";
+        return "system";
     }
 
     get description() {
-        return "Authentication module";
+        return "System commands Module";
     }
 
-    static get owner() {
-        return "266898040260919297";
-    }
-
-    /**
-     * Check the access authentication of a userid
-     *
-     * @param _id Userid
-     * @returns {number} Access level
-     */
-    getAuth(_id) {
-        if (Auth.owner === _id) {
-            return Auth.ADMIN;
+    execute(_msg, _commandline, BOT) {
+        // First of all let's check the access level
+        if (!BOT.internal.get("auth").isAdmin(_msg.author)) {
+            return new Error("Not authorized");
         }
-    }
 
-    /**
-     * Check if userid is an admin
-     *
-     * @param _user
-     * @returns {boolean} isAdmin
-     */
-    isAdmin(_user) {
-        return Auth.ADMIN === this.getAuth(_user.id);
+        let _subcommand = _commandline.slices.shift();
+        switch (_subcommand) {
+            case "shutdown":
+            case "off":
+            case "kill":
+                BOT.internal.get("system").shutdown();
+                break;
+            case "restart":
+            case "reboot":
+            case "reload":
+                BOT.internal.get("system").restart();
+                break;
+            default:
+                return new Error("Unknown command");
+        }
     }
 }
 
-module.exports = new Auth();
+module.exports = new SysCommands();

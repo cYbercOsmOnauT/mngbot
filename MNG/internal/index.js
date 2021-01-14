@@ -5,5 +5,6 @@ module.exports = {
   data: require("./data"),
   fs: require("./fs"),
   http: require("./http"),
+  system: require("./system"),
   view: require("./view")
 };
