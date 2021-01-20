@@ -40,11 +40,9 @@ class View {
      * @returns {string} The requested template
      */
     getTemplate(_name) {
-        switch (_name) {
-            case "error":
-                return {"text": "**ERROR:** {{message}}"};
-            default:
-                return false;
+        if ("error" === _name) {
+            // Errors are hardcoded to be sure they are shown.
+            return {"text": "**ERROR:** {{message}}"};
         }
     }
 
@@ -61,12 +59,8 @@ class View {
             return false;
         }
         // Now let's use the Object data for the replacements
-        Object.keys(_args).map(function(_key) {
-            let _regEx = new RegExp("{{" + _key + "}}", "g");
-            _template = _template.replace(_regEx, _args[_key]);
-        });
         // Send back the result
-        return _template;
+        return this._mustache.render(_template, _args);
     }
 }
 
