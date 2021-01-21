@@ -50,7 +50,7 @@ class Fs {
         if (!this.checkPath(_path)) {
             return false;
         }
-        this._FS.writeFile(_path, _data);
+        this._FS.writeFileSync(_path, _data);
     }
 
     read(_path) {

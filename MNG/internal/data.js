@@ -9,6 +9,12 @@ module.exports = {
         _number = _number + "";
         return _number.padStart(2, "0");
     },
+    objToString(_obj = {}) {
+      return JSON.stringify(_obj);
+    },
+    stringToObj(_string = "") {
+      return JSON.parse(_string);
+    },
     /**
      * Return bool to show if the bot was triggered
      * @param _msg Commandline object

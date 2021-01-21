@@ -32,6 +32,7 @@ class View {
     constructor() {
         this._mustache = require("mustache");
         this._fs = require("./fs");
+        this._data = require("./data")
     }
 
     /**
@@ -42,8 +43,9 @@ class View {
     getTemplate(_name) {
         if ("error" === _name) {
             // Errors are hardcoded to be sure they are shown.
-            return {"text": "**ERROR:** {{message}}"};
+            return {"type": "text", "content": "**ERROR:** {{message}}"};
         }
+        return this._fs.getTemplate(_name);
     }
 
     /**
@@ -59,8 +61,27 @@ class View {
             return false;
         }
         // Now let's use the Object data for the replacements
-        // Send back the result
-        return this._mustache.render(_template, _args);
+        if ("text" === _template.type) {
+            // Send back the result for simple text template
+            return this._mustache.render(_template.content, _args);
+        }
+
+        // Embed
+        let _str = this._data.objToString(_template.content);
+        let _parsed = this._mustache.render(_str, _args);
+        return this._data.stringToObj(_parsed);
+    }
+
+    respond(_tplName, _responseData, _message, _BOT, _reply = false) {
+        let _response = this.parseTemplate(_tplName, _responseData);
+
+        // Is it a reply?
+        if (_reply) {
+            _message.reply(_response);
+        }
+        else {
+            _message.send()
+        }
     }
 }
 
