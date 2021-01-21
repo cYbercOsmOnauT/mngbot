@@ -22,7 +22,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-class SYSTEM {
+class System {
     get name() {
         return "system";
     }
@@ -46,11 +46,23 @@ class SYSTEM {
         }, 1000);
     }
 
+    /**
+     * Shutting down
+     */
     shutdown() {
         setTimeout(function() {
             process.exit(1);
         }, 1000);
     }
+
+    /**
+     * Responds with the version of the bot
+     *
+     * @returns {string} Version number
+     */
+    getVersion() {
+        return "v1.0.0";
+    }
 }
 
-module.exports = new SYSTEM();
+module.exports = new System();

@@ -34,7 +34,7 @@ class SysCommands {
     execute(_msg, _commandline, BOT) {
         // First of all let's check the access level
         if (!BOT.internal.get("auth").isAdmin(_msg.author)) {
-            return new Error("Not authorized");
+            return false;
         }
 
         let _subcommand = _commandline.slices.shift();

@@ -32,7 +32,7 @@ class View {
     constructor() {
         this._mustache = require("mustache");
         this._fs = require("./fs");
-        this._data = require("./data")
+        this._data = require("./data");
     }
 
     /**
@@ -68,7 +68,9 @@ class View {
 
         // Embed
         let _str = this._data.objToString(_template.content);
-        let _parsed = this._mustache.render(_str, _args);
+        let _regex = new RegExp('§§(.*?)§§', "g");
+        let _parsed = this._mustache.render(_str.replace(_regex, "{{$1}}"), _args);
+
         return this._data.stringToObj(_parsed);
     }
 
@@ -80,7 +82,7 @@ class View {
             _message.reply(_response);
         }
         else {
-            _message.send()
+            _message.channel.send({embed: _response});
         }
     }
 }

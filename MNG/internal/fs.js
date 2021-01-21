@@ -32,6 +32,8 @@ class Fs {
     constructor() {
         this._PATH = require("path");
         this._FS = require("fs");
+        this._ROOT = this._PATH.resolve(".") + "/";
+        this._data = require("./data");
     }
 
     /**
@@ -41,9 +43,8 @@ class Fs {
      */
     checkPath(_path) {
         // Security
-        if (0 === _path.indexOf('/') || -1 !== _path.indexOf('..')) {
-            return false;
-        }
+        let _absolutePath = this._PATH.resolve(_path);
+        return 0 === _absolutePath.indexOf(this._ROOT);
     }
 
     write(_path, _data) {
@@ -53,16 +54,20 @@ class Fs {
         this._FS.writeFileSync(_path, _data);
     }
 
-    read(_path) {
+    read(_path, _json = true) {
         if (!this.checkPath(_path)) {
             return false;
         }
-        return this._FS.readFileSync(_path);
+        let _content = this._FS.readFileSync(_path).toString();
+        if (_json) {
+            _content = this._data.stringToObj(_content);
+        }
+        return _content;
     }
 
     getTemplate(_tplName, _lang = "en") {
         // Security Check
-        if (!_tplName.test(/^[a-zA-Z0-9-_]+$/)) {
+        if (!(/^[a-zA-Z0-9-_]+$/.test(_tplName))) {
             return false;
         }
         let _tplDir = this.getDir("templates", _lang);
@@ -72,12 +77,12 @@ class Fs {
     getDir(_dirname, _lang = "en") {
         switch (_dirname) {
             case "choices":
-                return this._PATH.resolve("../choices") + "/";
+                return this._PATH.resolve("./choices") + "/";
             case "templates":
-                return this._PATH.resolve("../templates/" + _lang) + "/";
+                return this._PATH.resolve("./templates/" + _lang) + "/";
             case "cache":
             default:
-                return this._PATH.resolve("../cache") + "/";
+                return this._PATH.resolve("./cache") + "/";
         }
     }
 

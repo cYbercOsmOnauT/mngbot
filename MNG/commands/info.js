@@ -31,8 +31,18 @@ class Info {
         return "Info command";
     }
 
-    execute(_msg, _commandline, BOT) {
+    constructor() {
+        this._system = require("../internal/system");
+    }
 
+    execute(_msg, _commandline, BOT) {
+        // First of all let's check the access level
+        if (!BOT.internal.get("auth").isAdmin(_msg.author)) {
+            return false;
+        }
+
+        let _version = this._system.getVersion();
+        BOT.internal.get("view").respond("info", {version: _version}, _msg, BOT);
     }
 }
 
