@@ -33,6 +33,7 @@ class View {
         this._mustache = require("mustache");
         this._fs = require("./fs");
         this._data = require("./data");
+        this._system = require("./system");
     }
 
     /**
@@ -51,9 +52,9 @@ class View {
     /**
      * Return a parsed template
      * @param _tplName {string} Name of the template
-     * @param _args {object} Object with string data that is used inside the template.
+     * @param _tplVars {object} Object with string data that is used inside the template.
      */
-    parseTemplate(_tplName, _args = {}) {
+    parseTemplate(_tplName, _tplVars = {}) {
         // First of all let's get the template
         let _template = this.getTemplate(_tplName);
         if (!_template) {
@@ -63,15 +64,22 @@ class View {
         // Now let's use the Object data for the replacements
         if ("text" === _template.type) {
             // Send back the result for simple text template
-            return this._mustache.render(_template.content, _args);
+            return this._mustache.render(_template.content, _tplVars);
         }
 
         // Embed
         let _str = this._data.objToString(_template.content);
         let _regex = new RegExp('§§(.*?)§§', "g");
-        let _parsed = this._mustache.render(_str.replace(_regex, "{{$1}}"), _args);
+        // Set the color and version for all embeds here
+        _tplVars.color = this._system.getEmbedColor();
+        _tplVars.version = this._system.getVersion();
+        let _parsed = this._mustache.render(_str.replace(_regex, "{{$1}}"), _tplVars);
+        let _tplObj = this._data.stringToObj(_parsed);
 
-        return this._data.stringToObj(_parsed);
+        // Need to change the color to integer
+        _tplObj.color = parseInt(_tplObj.color);
+
+        return _tplObj;
     }
 
     respond(_tplName, _responseData, _message, _BOT, _reply = false) {

@@ -42,6 +42,7 @@ class Info {
         }
 
         let _version = this._system.getVersion();
+        let _color = this._system.getEmbedColor();
         BOT.internal.get("view").respond("info", {version: _version}, _msg, BOT);
     }
 }

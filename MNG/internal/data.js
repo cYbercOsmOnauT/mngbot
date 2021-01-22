@@ -1,20 +1,54 @@
-require("dotenv").config();
+/**
+ * Data manipulation Module
+ *
+ * @author Tekin Birdüzen aka x5c0d3 aka Natsu DragonKnee <x5c0d3@gmail.com>
+ * @version 1.0.0
+ * @since Sep. 2020
+ * @licence GNU GPL v3.0
+ *
+ * Copyright (C) 2020  Tekin Birdüzen
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
 
-module.exports = {
-    name: 'data',
-    description: 'Module for data manupilation',
+class Data {
+    get name() {
+        return "data";
+    }
+    get description() {
+        return "Module for data manupilation";
+    }
+
     // Fill the leftside of 1-digit numbers with a zero
     zerofill(_number) {
         // Convert it to a string
         _number = _number + "";
         return _number.padStart(2, "0");
-    },
+    }
+
     objToString(_obj = {}) {
-      return JSON.stringify(_obj);
-    },
+        return JSON.stringify(_obj);
+    }
+
     stringToObj(_string = "") {
-      return JSON.parse(_string);
-    },
+        return JSON.parse(_string);
+    }
+
+    getRandomNumber(_max) {
+        return Math.floor(Math.random()*(_max+1));
+    }
+
     /**
      * Return bool to show if the bot was triggered
      * @param _msg Commandline object
@@ -27,7 +61,30 @@ module.exports = {
         }
         const PREFIX = process.env.PREFIX;
         return (PREFIX + " " === _msg.content.substr(0, PREFIX.length + 1));
-    },
+    }
+
+    getSubCommand(_cmdline) {
+        if ("undefined" !== typeof _cmdline.slices[0]) {
+            return _cmdline.slices[0].toString().toLowerCase();
+        }
+    }
+
+    getBirthdayImage(_heroine) {
+        // Saves us against circular dependencies
+        if ("undefined" === typeof this._fs) {
+            this._fs = require("./fs");
+        }
+        let _birthdays = this._fs.getData("birthday");
+        // Is she known?
+        if ("undefined" === _birthdays[_heroine]) {
+            return false;
+        }
+
+        let _heroineData = _birthdays[_heroine];
+        let _rnd = this.getRandomNumber(1);
+        return _heroineData.images[_rnd];
+    }
+
     /**
      * Splits the commandline into parts and put's everything into an object
      * @param BOT
@@ -171,4 +228,6 @@ module.exports = {
         // Return the object of arguments
         return _commandline;
     }
-};
+}
+
+module.exports = new Data();

@@ -26,14 +26,13 @@ class Fs {
     get name() {
         return "filesystem";
     }
-    get decription() {
+    get description() {
         return "Filesystem calls";
     }
     constructor() {
         this._PATH = require("path");
         this._FS = require("fs");
         this._ROOT = this._PATH.resolve(".") + "/";
-        this._data = require("./data");
     }
 
     /**
@@ -60,18 +59,40 @@ class Fs {
         }
         let _content = this._FS.readFileSync(_path).toString();
         if (_json) {
+            // Saves us against circular dependencies
+            if ("undefined" === typeof this._fs) {
+                this._data = require("./data");
+            }
             _content = this._data.stringToObj(_content);
         }
         return _content;
     }
 
+    /**
+     * Checks if a given string is clean
+     * @param _string
+     * @returns {boolean}
+     */
+    securityCheck(_string) {
+        return /^[a-zA-Z0-9-_]+$/.test(_string);
+    }
+
     getTemplate(_tplName, _lang = "en") {
         // Security Check
-        if (!(/^[a-zA-Z0-9-_]+$/.test(_tplName))) {
+        if (!this.securityCheck(_tplName)) {
             return false;
         }
         let _tplDir = this.getDir("templates", _lang);
         return this.read(_tplDir + _tplName + ".json");
+    }
+
+    getData(_filename) {
+        // Security Check
+        if (!this.securityCheck(_filename)) {
+            return false;
+        }
+        let _dataDir = this.getDir("data");
+        return this.read(_dataDir + _filename + ".json");
     }
 
     getDir(_dirname, _lang = "en") {
@@ -80,6 +101,8 @@ class Fs {
                 return this._PATH.resolve("./choices") + "/";
             case "templates":
                 return this._PATH.resolve("./templates/" + _lang) + "/";
+            case "data":
+                return this._PATH.resolve("./data") + "/";
             case "cache":
             default:
                 return this._PATH.resolve("./cache") + "/";

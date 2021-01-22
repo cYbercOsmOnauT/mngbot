@@ -31,13 +31,17 @@ class SysCommands {
         return "System commands Module";
     }
 
+    constructor() {
+        this._data = require("../internal/data");
+    }
+
     execute(_msg, _commandline, BOT) {
         // First of all let's check the access level
         if (!BOT.internal.get("auth").isAdmin(_msg.author)) {
             return false;
         }
 
-        let _subcommand = _commandline.slices.shift();
+        let _subcommand = this._data.getSubCommand(_commandline);
         switch (_subcommand) {
             case "shutdown":
             case "off":

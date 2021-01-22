@@ -1,0 +1,13 @@
+{
+  "type": "embed",
+  "content": {
+    "color": "§§color§§",
+    "footer": {
+      "icon_url": "https://i.imgur.com/0grVkOG.png",
+      "text": "Saibot §§version§§"
+    },
+    "image": {
+      "url": "https://i.imgur.com/§§image§§.png"
+    }
+  }
+}

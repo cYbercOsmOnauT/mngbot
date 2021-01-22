@@ -1,5 +1,5 @@
 /**
- * Test Class for Pong
+ * Birthday image module
  *
  * @author Tekin Birdüzen aka x5c0d3 aka Natsu DragonKnee <x5c0d3@gmail.com>
  * @version 1.0.0
@@ -22,18 +22,28 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-class Pong {
-  get name() {
-    return "ping";
-  }
+class Birthday {
+    get name() {
+        return "birthday";
+    }
+    get description() {
+        return "Birthday image module";
+    }
 
-  get description() {
-    return "Test class for Ping-Pong";
-  }
+    constructor() {
+        this._data = require("../internal/data");
+    }
 
-  execute(msg, args) {
-    msg.reply('pong');
-    msg.channel.send('pong');
-  }
+    execute(_msg, _commandline, BOT) {
+        // Who is it?
+        let _heroine = this._data.getSubCommand(_commandline);
+
+        // Grab the image to show
+        let _image = this._data.getBirthdayImage(_heroine);
+        if (_image) {
+            BOT.internal.get("view").respond("birthday", {image: _image}, _msg, BOT);
+        }
+    }
 }
-module.exports = new Pong();
+
+module.exports = new Birthday();

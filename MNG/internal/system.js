@@ -63,6 +63,15 @@ class System {
     getVersion() {
         return "v1.0.0";
     }
+
+    /**
+     * Responds with the color code for the embed
+     *
+     * @returns {number} Embed color
+     */
+    getEmbedColor() {
+        return 13800513; // Hex D29441
+    }
 }
 
 module.exports = new System();
