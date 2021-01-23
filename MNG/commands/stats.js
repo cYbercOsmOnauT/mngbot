@@ -1,5 +1,5 @@
 /**
- * Authentication Module
+ * Statistics image module
  *
  * @author Tekin Birdüzen aka x5c0d3 aka Natsu DragonKnee <x5c0d3@gmail.com>
  * @version 1.1.0
@@ -22,55 +22,28 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-const FS = require("./fs");
-
-class Auth {
-    // Constants
-    static get ADMIN() {
-        return 2;
-    }
-
-    static get MOD() {
-        return 1;
-    }
-
-    static get NORM() {
-        return 0;
-    }
-
+class Stats {
     get name() {
-        return "auth";
+        return "stats";
     }
-
     get description() {
-        return "Authentication module";
+        return "Stats image module";
     }
 
-    static get owner() {
-        return "266898040260919297";
+    constructor() {
+        this._data = require("../internal/data");
     }
 
-    /**
-     * Check the access authentication of a userid
-     *
-     * @param _id Userid
-     * @returns {number} Access level
-     */
-    getAuth(_id) {
-        if (Auth.owner === _id) {
-            return Auth.ADMIN;
+    execute(_msg, _commandline, BOT) {
+        // Who is it?
+        let _heroine = this._data.getSubCommand(_commandline);
+
+        // Grab the image to show
+        let _image = this._data.getStatsImage(_heroine);
+        if (_image) {
+            BOT.internal.get("view").respond("simpleImage", {image: _image}, _msg, BOT);
         }
-    }
-
-    /**
-     * Check if userid is an admin
-     *
-     * @param _user
-     * @returns {boolean} isAdmin
-     */
-    isAdmin(_user) {
-        return Auth.ADMIN === this.getAuth(_user.id);
     }
 }
 
-module.exports = new Auth();
+module.exports = new Stats();

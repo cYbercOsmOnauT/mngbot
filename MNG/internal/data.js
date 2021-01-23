@@ -2,7 +2,7 @@
  * Data manipulation Module
  *
  * @author Tekin Birdüzen aka x5c0d3 aka Natsu DragonKnee <x5c0d3@gmail.com>
- * @version 1.0.0
+ * @version 1.1.0
  * @since Sep. 2020
  * @licence GNU GPL v3.0
  *
@@ -60,7 +60,7 @@ class Data {
             return false;
         }
         const PREFIX = process.env.PREFIX;
-        return (PREFIX + " " === _msg.content.substr(0, PREFIX.length + 1));
+        return (PREFIX + " " === _msg.content.substr(0, PREFIX.length + 1).toLowerCase());
     }
 
     getSubCommand(_cmdline) {
@@ -76,13 +76,27 @@ class Data {
         }
         let _birthdays = this._fs.getData("birthday");
         // Is she known?
-        if ("undefined" === _birthdays[_heroine]) {
+        if ("undefined" === typeof _birthdays[_heroine]) {
             return false;
         }
 
         let _heroineData = _birthdays[_heroine];
         let _rnd = this.getRandomNumber(1);
         return _heroineData.images[_rnd];
+    }
+
+    getStatsImage(_heroine) {
+        // Saves us against circular dependencies
+        if ("undefined" === typeof this._fs) {
+            this._fs = require("./fs");
+        }
+        let _stats = this._fs.getData("stats");
+        // Is she known?
+        if ("undefined" === typeof _stats[_heroine]) {
+            return false;
+        }
+
+        return _stats[_heroine].images[0];
     }
 
     /**

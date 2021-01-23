@@ -2,7 +2,7 @@
  * Birthday image module
  *
  * @author Tekin Birdüzen aka x5c0d3 aka Natsu DragonKnee <x5c0d3@gmail.com>
- * @version 1.0.0
+ * @version 1.1.0
  * @since Sep. 2020
  * @licence GNU GPL v3.0
  *
@@ -41,7 +41,7 @@ class Birthday {
         // Grab the image to show
         let _image = this._data.getBirthdayImage(_heroine);
         if (_image) {
-            BOT.internal.get("view").respond("birthday", {image: _image}, _msg, BOT);
+            BOT.internal.get("view").respond("simpleImage", {image: _image}, _msg, BOT);
         }
     }
 }
