@@ -60,7 +60,7 @@ class Fs {
         let _content = this._FS.readFileSync(_path).toString();
         if (_json) {
             // Saves us against circular dependencies
-            if ("undefined" === typeof this._fs) {
+            if ("undefined" === typeof this._data) {
                 this._data = require("./data");
             }
             _content = this._data.stringToObj(_content);

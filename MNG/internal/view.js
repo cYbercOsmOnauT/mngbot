@@ -26,7 +26,7 @@ class View {
     get name() {
         return "view";
     }
-    get decription() {
+    get description() {
         return "Bot respond module";
     }
     constructor() {
@@ -69,10 +69,11 @@ class View {
 
         // Embed
         let _str = this._data.objToString(_template.content);
-        let _regex = new RegExp('§§(.*?)§§', "g");
         // Set the color and version for all embeds here
         _tplVars.color = this._system.getEmbedColor();
         _tplVars.version = this._system.getVersion();
+
+        let _regex = new RegExp('§§(.*?)§§', "g");
         let _parsed = this._mustache.render(_str.replace(_regex, "{{$1}}"), _tplVars);
         let _tplObj = this._data.stringToObj(_parsed);
 

@@ -56,10 +56,6 @@ class BOT {
         this.messageListener();
     }
 
-    logout() {
-        this._BOT.logout();
-    }
-
     messageListener() {
         this._BOT.on("message", _msg => {
             // Does the message start with our prefix and also not from a Bot?
