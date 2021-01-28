@@ -69,34 +69,21 @@ class Data {
         }
     }
 
-    getBirthdayImage(_heroine) {
+    getImageData(_heroine, _dataName) {
         // Saves us against circular dependencies
         if ("undefined" === typeof this._fs) {
             this._fs = require("./fs");
         }
-        let _birthdays = this._fs.getData("birthday");
+        let _birthdays = this._fs.getData(_dataName);
         // Is she known?
-        if ("undefined" === typeof _birthdays[_heroine]) {
+        if ("undefined" === typeof _birthdays[_heroine] || !_birthdays) {
             return false;
         }
 
         let _heroineData = _birthdays[_heroine];
+        let _rndmax = _heroineData.length - 1;
         let _rnd = this.getRandomNumber(1);
         return _heroineData.images[_rnd];
-    }
-
-    getStatsImage(_heroine) {
-        // Saves us against circular dependencies
-        if ("undefined" === typeof this._fs) {
-            this._fs = require("./fs");
-        }
-        let _stats = this._fs.getData("stats");
-        // Is she known?
-        if ("undefined" === typeof _stats[_heroine]) {
-            return false;
-        }
-
-        return _stats[_heroine].images[0];
     }
 
     /**

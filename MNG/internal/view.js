@@ -63,35 +63,46 @@ class View {
         }
         // Now let's use the Object data for the replacements
         if ("text" === _template.type) {
-            // Send back the result for simple text template
-            return this._mustache.render(_template.content, _tplVars);
+            // Simple text template
+            _template.content = this._mustache.render(_template.content, _tplVars);
         }
+        else {
 
-        // Embed
-        let _str = this._data.objToString(_template.content);
-        // Set the color and version for all embeds here
-        _tplVars.color = this._system.getEmbedColor();
-        _tplVars.version = this._system.getVersion();
+            // Embed
+            let _str = this._data.objToString(_template.content);
+            // Set the color and version for all embeds here
+            _tplVars.color = this._system.getEmbedColor();
+            _tplVars.version = this._system.getVersion();
 
-        let _regex = new RegExp('§§(.*?)§§', "g");
-        let _parsed = this._mustache.render(_str.replace(_regex, "{{$1}}"), _tplVars);
-        let _tplObj = this._data.stringToObj(_parsed);
+            let _regex = new RegExp('§§(.*?)§§', "g");
+            let _content = this._mustache.render(_str.replace(_regex, "{{$1}}"), _tplVars);
+            let _tplObj = this._data.stringToObj(_content);
 
-        // Need to change the color to integer
-        _tplObj.color = parseInt(_tplObj.color);
+            // Need to change the color to integer
+            _tplObj.color = parseInt(_tplObj.color);
 
-        return _tplObj;
+            _template.content = _tplObj;
+        }
+        return _template;
     }
 
     respond(_tplName, _responseData, _message, _BOT, _reply = false) {
-        let _response = this.parseTemplate(_tplName, _responseData);
+        let  _parsed = this.parseTemplate(_tplName, _responseData);
+        let _response = _parsed.content;
+
+        // Is it an Embed?
+        if ("embed" === _parsed.type) {
+            _response = {
+                embed: _response
+            }
+        }
 
         // Is it a reply?
         if (_reply) {
             _message.reply(_response);
         }
         else {
-            _message.channel.send({embed: _response});
+            _message.channel.send(_response);
         }
     }
 }

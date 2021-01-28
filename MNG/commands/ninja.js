@@ -1,5 +1,5 @@
 /**
- * Birthday image module
+ * Ninja clothing image module
  *
  * @author Tekin Birdüzen aka x5c0d3 aka Natsu DragonKnee <x5c0d3@gmail.com>
  * @version 1.1.0
@@ -22,12 +22,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-class Birthday {
+class Stats {
     get name() {
-        return "birthday";
+        return "ninja";
     }
     get description() {
-        return "Birthday image module";
+        return "Ninja clothing image module";
     }
 
     constructor() {
@@ -39,11 +39,11 @@ class Birthday {
         let _heroine = this._data.getSubCommand(_commandline);
 
         // Grab the image to show
-        let _image = this._data.getImageData(_heroine, "birthday");
+        let _image = this._data.getImageData(_heroine, "clothing");
         if (_image) {
             BOT.internal.get("view").respond("simpleImage", {image: _image}, _msg, BOT);
         }
     }
 }
 
-module.exports = new Birthday();
+module.exports = new Stats();
