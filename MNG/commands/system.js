@@ -46,12 +46,13 @@ class SysCommands {
             case "shutdown":
             case "off":
             case "kill":
-                BOT.internal.get("system").shutdown();
+                BOT.internal.get("system").shutdown(_msg, BOT);
                 break;
             case "restart":
             case "reboot":
             case "reload":
-                BOT.internal.get("system").restart();
+            case "refresh":
+                BOT.internal.get("system").restart(_msg, BOT);
                 break;
             default:
                 return new Error("Unknown command");

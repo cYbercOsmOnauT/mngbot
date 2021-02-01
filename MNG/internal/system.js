@@ -30,10 +30,15 @@ class System {
         return "Class for system calls";
     }
 
+    constructor() {
+        this._data = require("../internal/data");
+    }
     /**
      * Restarting the bot
      */
-    restart () {
+    restart (_msg, _BOT) {
+        // Say something
+        _BOT.internal.get("view").respond("response", {message: "Hai onii-chan! _Restarting main system..._"}, _msg, _BOT);
         setTimeout(function () {
             process.on("exit", function () {
                 require("child_process").spawn(process.argv.shift(), process.argv, {
@@ -49,7 +54,9 @@ class System {
     /**
      * Shutting down
      */
-    shutdown() {
+    shutdown(_msg, _BOT) {
+        // Say something
+        _BOT.internal.get("view").respond("response", {message: "_Shutting down..._ Oyasuminasai Onii-chan!"}, _msg, _BOT);
         setTimeout(function() {
             process.exit(1);
         }, 1000);
