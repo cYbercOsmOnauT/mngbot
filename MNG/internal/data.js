@@ -2,7 +2,7 @@
  * Data manipulation Module
  *
  * @author Tekin Birdüzen aka x5c0d3 aka Natsu DragonKnee <x5c0d3@gmail.com>
- * @version 1.1.0
+ * @version 1.2.1
  * @since Sep. 2020
  * @licence GNU GPL v3.0
  *
@@ -74,15 +74,15 @@ class Data {
         if ("undefined" === typeof this._fs) {
             this._fs = require("./fs");
         }
-        let _birthdays = this._fs.getData(_dataName);
+        let _data = this._fs.getData(_dataName);
         // Is she known?
-        if ("undefined" === typeof _birthdays[_heroine] || !_birthdays) {
+        if ("undefined" === typeof _data[_heroine] || !_data) {
             return false;
         }
 
-        let _heroineData = _birthdays[_heroine];
-        let _rndmax = _heroineData.length - 1;
-        let _rnd = this.getRandomNumber(1);
+        let _heroineData = _data[_heroine];
+        let _rndmax = _heroineData.images.length - 1;
+        let _rnd = this.getRandomNumber(_rndmax);
         return _heroineData.images[_rnd];
     }
 
