@@ -2,7 +2,7 @@
  * Variables Module
  *
  * @author Tekin Birdüzen aka x5c0d3 aka Natsu DragonKnee <x5c0d3@gmail.com>
- * @version 1.1.0
+ * @version 1.2.1
  * @since Sep. 2020
  * @licence GNU GPL v3.0
  *

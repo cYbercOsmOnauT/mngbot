@@ -2,7 +2,7 @@
  * Statistics image module
  *
  * @author Tekin Birdüzen aka x5c0d3 aka Natsu DragonKnee <x5c0d3@gmail.com>
- * @version 1.1.0
+ * @version 1.2.1
  * @since Sep. 2020
  * @licence GNU GPL v3.0
  *
@@ -39,7 +39,9 @@ class Stats {
         let _heroine = this._data.getSubCommand(_commandline);
 
         // Grab the image to show
+        console.log(_heroine);
         let _image = this._data.getImageData(_heroine, "stats");
+        console.log(_image);
         if (_image) {
             BOT.internal.get("view").respond("simpleImage", {image: _image}, _msg, BOT);
         }
