@@ -39,9 +39,7 @@ class Stats {
         let _heroine = this._data.getSubCommand(_commandline);
 
         // Grab the image to show
-        console.log(_heroine);
         let _image = this._data.getImageData(_heroine, "stats");
-        console.log(_image);
         if (_image) {
             BOT.internal.get("view").respond("simpleImage", {image: _image}, _msg, BOT);
         }
