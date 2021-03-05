@@ -57,7 +57,7 @@ class BOT {
     }
 
     messageListener() {
-        this._BOT.on("message", _msg => {
+        this._BOT.on("message", async _msg => {
             // Does the message start with our prefix and also not from a Bot?
             if (!this._BOT.internal.get("data").isBotTriggered(_msg)) {
                 // No, so do nothing
@@ -76,7 +76,7 @@ class BOT {
             // Get  the actual command
             const command = _commandline.command.toLowerCase();
             try {
-                this._BOT.commands.get(command).execute(_msg, _commandline, this._BOT);
+                await this._BOT.commands.get(command).execute(_msg, _commandline, this._BOT);
             } catch (error) {
                 console.error(error);
                 _msg.reply("Hmm, I got an error.\n"+error);
