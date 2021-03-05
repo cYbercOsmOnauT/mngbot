@@ -4,7 +4,7 @@
   "description": "Discord bot for Moe! Ninja Girls",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "saibot": "node ./index.js"
   },
   "author": "Natsu & Grim",
   "license": "GNU GPL v3.0",
