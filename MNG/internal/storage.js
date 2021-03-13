@@ -35,7 +35,7 @@ class Storage {
         this.storage = require("node-persist");
         // Initialize the storage
         this.storage.init({
-            dir: 'relative/path/to/persist',
+            dir: '../variables/',
             stringify: JSON.stringify,
             parse: JSON.parse,
             encoding: 'utf8',
@@ -47,4 +47,32 @@ class Storage {
             forgiveParseErrors: false
         });
     }
+
+    /**
+     * Return the value of a saved variable
+     * @param _varName
+     * @returns {*}
+     */
+    async getVar(_varName) {
+        return await this.storage.getItem(_varName);
+    }
+
+    /**
+     * Sets a variable with a value
+     * @param _varName
+     * @param _varValue
+     */
+    async setVar(_varName, _varValue) {
+        this.storage.setItem(_varName, _varValue);
+    }
+
+    /**
+     * Deletes a variable
+     * @param _varName
+     */
+    async delVar(_varName) {
+        this.storage.removeItem(_varName);
+    }
 }
+
+module.exports = new Storage();

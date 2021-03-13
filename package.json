@@ -3,6 +3,12 @@
     "request": "^2.88.2"
   },
   "dependencies": {
-    "node-persist": "^3.1.0"
+    "discord.js": "^12.5.1",
+    "dotenv": "^8.2.0",
+    "fs": "^0.0.1-security",
+    "mustache": "^4.1.0",
+    "node-persist": "^3.1.0",
+    "node-schedule": "^2.0.0",
+    "path": "^0.12.7"
   }
 }
