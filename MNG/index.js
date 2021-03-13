@@ -24,7 +24,7 @@
 "use strict";
 
 // Set the requirements and constants
-var SCHEDULE = require("node-schedule");
+global.SCHEDULE = require("node-schedule");
 const DISCORD = require("discord.js");
 const BOT = new DISCORD.Client();
 BOT.commands = new DISCORD.Collection();
