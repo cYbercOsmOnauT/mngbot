@@ -1,7 +1,7 @@
 {
   "type": "embed",
   "content": {
-    "description": "Discord Version of Moe! Ninja Saibot",
+    "description": "Discord Version of Moe! Ninja Saibot\nPing: **§§ping§§ms** | Latency: **§§latency§§ms**\nUptime: §§#uptime§§**§§weeks§§w §§days§§d §§hours§§:§§minutes§§:§§seconds§§**§§/uptime§§",
     "url": "https://discord.gg/UdVaY6E",
     "color": "§§color§§",
     "footer": {

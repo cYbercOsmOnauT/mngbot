@@ -33,17 +33,23 @@ class Info {
 
     constructor() {
         this._system = require("../internal/system");
+        this._data = require("../internal/data");
     }
 
-    execute(_msg, _commandline, BOT) {
+    execute(_msg, _commandline, _BOT) {
         // First of all let's check the access level
-        if (!BOT.internal.get("auth").isAdmin(_msg.author)) {
+        if (!_BOT.internal.get("auth").isAdmin(_msg.author)) {
             return false;
         }
 
-        let _version = this._system.getVersion();
-        let _color = this._system.getEmbedColor();
-        BOT.internal.get("view").respond("info", {version: _version}, _msg, BOT);
+        let _latency = this._system.getLatency(_msg);
+        let _ping = this._system.getPing(_BOT);
+        let _uptime = this._system.getUptime(_BOT);
+        _BOT.internal.get("view").respond("info", {
+            latency: _latency,
+            ping: _ping,
+            uptime: _uptime
+        }, _msg, _BOT);
     }
 }
 

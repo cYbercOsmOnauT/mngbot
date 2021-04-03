@@ -59,13 +59,30 @@ class System {
     }
 
     /**
-     * Respond the ping time in ms
-     * @param _mgs
+     * Get the ping time in ms
      * @param _BOT
-     * @returns {any}
+     * @returns {number} ping in ms
      */
-    ping(_mgs, _BOT) {
-        return _BOT.ping;
+    getPing(_BOT) {
+        return Math.round(_BOT.ping);
+    }
+
+    /**
+     * Get the ping in ms
+     * @param _BOT
+     * @returns {object} uptime in ms
+     */
+    getUptime(_BOT) {
+        return this._data.parseTime(_BOT.uptime);
+    }
+
+    /**
+     * Get the latency in ms
+     * @param _msg
+     * @returns {number} latency in ms
+     */
+    getLatency(_msg) {
+        return Date.now() - _msg.createdTimestamp;
     }
 
     /**
@@ -74,7 +91,7 @@ class System {
      * @returns {string} Version number
      */
     getVersion() {
-        return "v1.2.1";
+        return "v1.3.0";
     }
 
     /**

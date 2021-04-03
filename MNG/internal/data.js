@@ -87,6 +87,22 @@ class Data {
     }
 
     /**
+     * Responds an object with calculated values for a given ms time
+     * @param _ms
+     * @returns {{hours: number, seconds: number, weeks: number, minutes: number, days: number}}
+     */
+    parseTime(_ms) {
+        // Some simple math...
+        return {
+            weeks: Math.floor(_ms / 604800000),
+            days: Math.floor(_ms / 86400000) % 7,
+            hours: ("0" + Math.floor(_ms / 3600000) % 24).substr(-2),
+            minutes: ("0" + Math.floor(_ms / 60000) % 60).substr(-2),
+            seconds: ("0" + Math.floor(_ms / 1000) % 60).substr(-2)
+        };
+    }
+
+    /**
      * Splits the commandline into parts and put's everything into an object
      * @param BOT
      * @param _line
