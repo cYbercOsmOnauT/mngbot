@@ -56,7 +56,7 @@ class BOT {
         this.messageListener();
     }
 
-    messageListener() {
+    async messageListener() {
         this._BOT.on("message", async _msg => {
             // Does the message start with our prefix and also not from a Bot?
             if (!this._BOT.internal.get("data").isBotTriggered(_msg)) {

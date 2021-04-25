@@ -30,12 +30,45 @@ class Var {
         return "Work with internal variables!";
     }
 
-    execute(_msg, _commandline, BOT) {
+    constructor() {
+        this._data = require("../internal/data");
+        this._storage = require("../internal/storage");
+    }
+
+    async execute(_msg, _commandline, BOT) {
         // First of all let's check the access level
         if (!BOT.internal.get("auth").isAdmin(_msg.author)) {
-            console.log(_msg.author);
+            BOT.internal.get("view").respond("error", {message: "Access denied"}, _msg, BOT);
+            return;
         }
-        let _subcommand = _commandline.slices.shift();
+        let _subcommand = this._data.getSubCommand(_commandline);
+        let _varname = this._data.getSubCommand(_commandline, 1);
+        let _message = "";
+        let _value;
+
+        switch (_subcommand) {
+            case 'get':
+                _value = await this._storage.getVar(_varname);
+                if ("undefined" === typeof _value) {
+                    _message = "The variable **" + _varname + "** is unset!";
+                }
+                else {
+                    _message = "The value of **" + _varname + "** is: **" + _value + "**";
+                }
+                break;
+            case 'set':
+                _value = this._data.getSubCommand(_commandline, 2);
+                this._storage.setVar(_varname, _value);
+                _message = "Variable **" + _varname + "** set to: **" + _value + "**";
+                break;
+            case 'delete':
+            case 'purge':
+            case 'remove':
+                this._storage.delVar(_varname);
+                _message = "Variable **" + _varname + "** deleted.";
+        }
+
+        BOT.internal.get("view").respond("response", {message: _message}, _msg, BOT);
     }
 }
 

@@ -63,9 +63,9 @@ class Data {
         return (PREFIX + " " === _msg.content.substr(0, PREFIX.length + 1).toLowerCase());
     }
 
-    getSubCommand(_cmdline) {
-        if ("undefined" !== typeof _cmdline.slices[0]) {
-            return _cmdline.slices[0].toString().toLowerCase();
+    getSubCommand(_cmdline, _pos = 0) {
+        if ("undefined" !== typeof _cmdline.slices[_pos]) {
+            return _cmdline.slices[_pos].toString().toLowerCase();
         }
     }
 
@@ -89,7 +89,7 @@ class Data {
     /**
      * Responds an object with calculated values for a given ms time
      * @param _ms
-     * @returns {{hours: number, seconds: number, weeks: number, minutes: number, days: number}}
+     * @returns {object}
      */
     parseTime(_ms) {
         // Some simple math...
