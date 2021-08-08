@@ -93,7 +93,12 @@ class View {
         // Is it an Embed?
         if ("embed" === _parsed.type) {
             _response = {
-                embed: _response
+                embeds: [_response]
+            }
+        }
+        else {
+            _response = {
+                content: _response
             }
         }
 

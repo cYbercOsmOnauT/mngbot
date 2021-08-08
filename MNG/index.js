@@ -25,10 +25,11 @@
 
 // Set the requirements and constants
 global.SCHEDULE = require("node-schedule");
-const DISCORD = require("discord.js");
-const BOT = new DISCORD.Client();
-BOT.commands = new DISCORD.Collection();
-BOT.internal = new DISCORD.Collection();
+const { Client, Intents, Collection } = require('discord.js');
+const BOT = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
+// const BOT = new DISCORD.Client();
+BOT.commands = new Collection();
+BOT.internal = new Collection();
 const BOTCOMMANDS = require("./commands");
 const INTERNAL = require("./internal");
 
