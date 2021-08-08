@@ -2,7 +2,7 @@
  * System Module
  *
  * @author Tekin Birdüzen aka x5c0d3 aka Natsu DragonKnee <x5c0d3@gmail.com>
- * @version 1.2.1
+ * @version 1.4.0
  * @since Sep. 2020
  * @licence GNU GPL v3.0
  *
@@ -91,7 +91,7 @@ class System {
      * @returns {string} Version number
      */
     getVersion() {
-        return "v1.3.0";
+        return "v1.4.0";
     }
 
     /**

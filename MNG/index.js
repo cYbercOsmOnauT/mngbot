@@ -2,7 +2,7 @@
  * MNG Bot that works with modular methods
  * @author Tekin Birdüzen aka x5c0d3 aka Natsu DragonKnee
  * @author Nicolas Guyomarch aka Lord Grim
- * @version 1.2.1
+ * @version 1.4.0
  * @since Sep. 2020
  * @licence GNU GPL v3.0
  *
