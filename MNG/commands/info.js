@@ -2,7 +2,7 @@
  * Info command Module
  *
  * @author Tekin Birdüzen aka x5c0d3 aka Natsu DragonKnee <x5c0d3@gmail.com>
- * @version 1.4.0
+ * @version 1.4.1
  * @since Sep. 2020
  * @licence GNU GPL v3.0
  *
@@ -43,11 +43,9 @@ class Info {
         }
 
         let _latency = this._system.getLatency(_msg);
-        let _ping = this._system.getPing(_BOT);
         let _uptime = this._system.getUptime(_BOT);
         _BOT.internal.get("view").respond("info", {
             latency: _latency,
-            ping: _ping,
             uptime: _uptime
         }, _msg, _BOT);
     }

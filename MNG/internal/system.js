@@ -2,7 +2,7 @@
  * System Module
  *
  * @author Tekin Birdüzen aka x5c0d3 aka Natsu DragonKnee <x5c0d3@gmail.com>
- * @version 1.4.0
+ * @version 1.4.1
  * @since Sep. 2020
  * @licence GNU GPL v3.0
  *
@@ -43,7 +43,7 @@ class System {
         // Say something
         _BOT.internal.get("view").respond("response", {message: "Hai onii-chan! _Restarting main system..._"}, _msg, _BOT);
         setTimeout(function () {
-            this._exec("/usr/bin/systemctl restart saibot.service");
+            this._exec("sudo /usr/bin/systemctl restart saibot.service");
         }, 1000);
     }
 
@@ -54,17 +54,8 @@ class System {
         // Say something
         _BOT.internal.get("view").respond("response", {message: "_Shutting down..._ Oyasuminasai Onii-chan!"}, _msg, _BOT);
         setTimeout(function() {
-            this._exec("/usr/bin/systemctl stop saibot.service");
+            this._exec("sudo /usr/bin/systemctl stop saibot.service");
         }, 1000);
-    }
-
-    /**
-     * Get the ping time in ms
-     * @param _BOT
-     * @returns {number} ping in ms
-     */
-    getPing(_BOT) {
-        return Math.round(_BOT.ping);
     }
 
     /**
@@ -91,7 +82,7 @@ class System {
      * @returns {string} Version number
      */
     getVersion() {
-        return "v1.4.0";
+        return "v1.4.1";
     }
 
     /**
