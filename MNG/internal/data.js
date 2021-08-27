@@ -67,6 +67,7 @@ class Data {
         if ("undefined" !== typeof _cmdline.slices[_pos]) {
             return _cmdline.slices[_pos].toString().toLowerCase();
         }
+        return false;
     }
 
     getImageData(_heroine, _dataName) {
