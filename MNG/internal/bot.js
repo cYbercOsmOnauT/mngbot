@@ -22,6 +22,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 require("dotenv").config();
+const {DiscordInteractions} = require("slash-commands");
 
 class BOT {
     /**
@@ -37,6 +38,11 @@ class BOT {
 
     constructor() {
         this._token = process.env.TOKEN;
+        this._interaction = new DiscordInteractions({
+            applicationId: "1234567890",
+            authToken: this._token,
+            publicKey: process.env.PUBKEY,
+        });
     }
     /**
      * Login and initialize our bot

@@ -28,7 +28,21 @@ class SysCommands {
     }
 
     get description() {
-        return "System commands Module";
+        return "System commands";
+    }
+
+    get slash() {
+        return {
+            name: this.name,
+            description: this.description,
+            options: [
+                {
+                    name: "system",
+                    description: "should the image be big",
+                    type: ApplicationCommandOptionType.BOOLEAN,
+                },
+            ],
+        };
     }
 
     constructor() {
