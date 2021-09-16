@@ -42,15 +42,28 @@
     "images": ["8q86pQg"]
   },
   "johnny": {
-    "images": ["WpBvlAq"]
+    "images": [
+      "WpBvlAq"
+    ]
   },
   "mari": {
-    "images": ["XPAuVpm"]
+    "images": [
+      "XPAuVpm"
+    ]
   },
   "zina": {
-    "images": ["Mzut9Y2"]
+    "images": [
+      "Mzut9Y2"
+    ]
   },
   "venus": {
-    "images": ["V5eKnew"]
+    "images": [
+      "V5eKnew"
+    ]
+  },
+  "setsuna": {
+    "images": [
+      "DT3rIMd"
+    ]
   }
 }
