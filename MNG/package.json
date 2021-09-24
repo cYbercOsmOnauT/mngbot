@@ -20,7 +20,7 @@
     "slash-commands": "^1.5.0"
   },
   "devDependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "mustache": "^4.2.0"
   }
 }
