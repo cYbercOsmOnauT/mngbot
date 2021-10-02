@@ -70,7 +70,7 @@ class Data {
         return false;
     }
 
-    getImageData(_heroine, _dataName) {
+    getImageData(_heroine, _dataName, _pos = false) {
         // Saves us against circular dependencies
         if ("undefined" === typeof this._fs) {
             this._fs = require("./fs");
@@ -82,9 +82,15 @@ class Data {
         }
 
         let _heroineData = _data[_heroine];
-        let _rndmax = _heroineData.images.length - 1;
-        let _rnd = this.getRandomNumber(_rndmax);
-        return _heroineData.images[_rnd];
+        // false and a number outside the array bonds is "random"
+        if (!_pos || _pos > _heroineData.images.length || _pos < 1) {
+            let _rndmax = _heroineData.images.length - 1;
+            _pos = this.getRandomNumber(_rndmax);
+        } else {
+            // Remember Array keys start  with 0 not 1
+            _pos--;
+        }
+        return _heroineData.images[_pos];
     }
 
     /**

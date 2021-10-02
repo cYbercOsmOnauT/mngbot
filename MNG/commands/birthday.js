@@ -37,9 +37,12 @@ class Birthday {
     execute(_msg, _commandline, BOT) {
         // Who is it?
         let _heroine = this._data.getSubCommand(_commandline);
+        let _version = this._data.getSubCommand(_commandline, 1);
+        // If undefined set false
+        _version ??= false;
 
         // Grab the image to show
-        let _image = this._data.getImageData(_heroine, "birthday");
+        let _image = this._data.getImageData(_heroine, "birthday", _version);
         if (_image) {
             BOT.internal.get("view").respond("simpleImage", {image: _image}, _msg, BOT);
         }

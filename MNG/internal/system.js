@@ -82,7 +82,7 @@ class System {
      * @returns {string} Version number
      */
     getVersion() {
-        return "v1.4.1";
+        return "v1.4.2";
     }
 
     /**
