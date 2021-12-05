@@ -127,7 +127,7 @@ class Data {
                 _regex.lastIndex++;
                 continue;
             }
-            // First of all let's get  rid of the " at the left and right (if it's surrounded by quotes)
+            // First let's get  rid of the " at the left and right (if it's surrounded by quotes)
             if (/^".*"$/.test(_hit[0])) {
                 // Cut the quotes from the edges out
                 _hit[0] = _hit[0].substring(1, _hit[0].length - 1);
@@ -151,7 +151,7 @@ class Data {
 
         // First part needs to be the command
         // We check if the command is known
-        const _command = _parts.shift();
+        const _command = _parts.shift().toLowerCase();
         if (!BOT.commands.has(_command)) {
             // Unknown command
             return {"error": "Unknown command **" + _command + "**"};

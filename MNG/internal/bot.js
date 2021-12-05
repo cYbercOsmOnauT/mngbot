@@ -49,7 +49,7 @@ class BOT {
      * @param _BOT Bot object from the main js
      */
     init(_BOT) {
-        // First of all save the BOT object
+        // First save the BOT object
         this._BOT = _BOT;
 
         // Now let's log in
@@ -71,7 +71,6 @@ class BOT {
             }
 
             const _commandline = this._BOT.internal.get("data").parseCommandline(this._BOT, _msg.content);
-
             if ("undefined" !== typeof _commandline.error) {
                 // There was an error
                 // Send error message to view
