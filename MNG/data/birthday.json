@@ -1,21 +1,45 @@
 {
   "akari": {
-    "images": ["UgbKkBs", "lfHc0V4", "WDxJpnD"]
+    "images": [
+      "UgbKkBs",
+      "lfHc0V4",
+      "WDxJpnD"
+    ]
   },
   "enju": {
-    "images": ["RuXe4bC", "XpBjRfx", "DPbqSel"]
+    "images": [
+      "RuXe4bC",
+      "XpBjRfx",
+      "DPbqSel"
+    ]
   },
   "ricka": {
-    "images": ["K35GRpE", "9FTgB69"]
+    "images": [
+      "K35GRpE",
+      "9FTgB69",
+      "J8ABaXd",
+      "qVTeXf8"
+    ]
   },
   "myu": {
-    "images": ["zbjhGWB", "KPBH8b5", "sSHhVPe"]
+    "images": [
+      "zbjhGWB",
+      "KPBH8b5",
+      "sSHhVPe"
+    ]
   },
   "tengge": {
-    "images": ["1GmIkiy", "ZPNu3DW", "rwrskkL"]
+    "images": [
+      "1GmIkiy",
+      "ZPNu3DW",
+      "rwrskkL"
+    ]
   },
   "yamabuki": {
-    "images": ["0dfMUMr", "GUD6eGJ"]
+    "images": [
+      "0dfMUMr",
+      "GUD6eGJ"
+    ]
   },
   "lily": {
     "images": [
@@ -25,15 +49,26 @@
     ]
   },
   "nanao": {
-    "images": ["uJsrxlk", "hYlTOZC"]
+    "images": [
+      "uJsrxlk",
+      "hYlTOZC",
+      "2kkMFYp"
+    ]
   },
   "hotaru": {
-    "images": ["qgrpBIN", "qgrpBIN", "3ICmpEG"]
+    "images": [
+      "qgrpBIN",
+      "3ICmpEG"
+    ]
   },
   "oka": {
-    "images": ["MBpLaHO"]
+    "images": [
+      "MBpLaHO"
+    ]
   },
   "yozuki": {
-    "images": ["SbCFHVH"]
+    "images": [
+      "SbCFHVH"
+    ]
   }
 }
