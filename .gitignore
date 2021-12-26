@@ -1,3 +1,5 @@
 /MNG/.env
 /MNG/node_modules/
 /MNG/choices/*.png
+/node_modules/
+/.idea/
