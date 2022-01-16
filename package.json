@@ -3,7 +3,7 @@
     "request": "^2.88.2"
   },
   "dependencies": {
-    "discord.js": "^12.5.1",
+    "discord.js": "^13.0.1",
     "dotenv": "^8.2.0",
     "fs": "^0.0.1-security",
     "mustache": "^4.1.0",
