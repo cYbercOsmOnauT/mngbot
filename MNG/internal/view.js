@@ -39,7 +39,7 @@ class View {
     /**
      * Returns templates for bot responses
      * @param _name {string} Name of the template
-     * @returns {string} The requested template
+     * @returns {string|object} The requested template
      */
     getTemplate(_name) {
         if ("error" === _name) {
@@ -55,7 +55,7 @@ class View {
      * @param _tplVars {object} Object with string data that is used inside the template.
      */
     parseTemplate(_tplName, _tplVars = {}) {
-        // First of all let's get the template
+        // First let's get the template
         let _template = this.getTemplate(_tplName);
         if (!_template) {
             // Unknown Template
