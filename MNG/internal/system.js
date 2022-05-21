@@ -32,9 +32,11 @@ class System {
 
     constructor() {
         this._data = require("../internal/data");
-        let { exec, spawn } = require("child_process");
-        this._exec = exec;
-        this._spawn = spawn;
+        let {exec, spawn} = require("child_process");
+        global._system = {
+            _exec: exec,
+            _spawn: spawn
+        }
     }
     /**
      * Restarting the bot
@@ -43,7 +45,7 @@ class System {
         // Say something
         _BOT.internal.get("view").respond("response", {message: "Hai onii-chan! _Restarting main system..._"}, _msg, _BOT);
         setTimeout(function () {
-            this._exec("sudo /usr/bin/systemctl restart saibot.service");
+            global._system._exec("sudo /usr/bin/systemctl restart saibot.service");
         }, 1000);
     }
 
@@ -54,7 +56,7 @@ class System {
         // Say something
         _BOT.internal.get("view").respond("response", {message: "_Shutting down..._ Oyasuminasai Onii-chan!"}, _msg, _BOT);
         setTimeout(function() {
-            this._exec("sudo /usr/bin/systemctl stop saibot.service");
+            global._system._exec("sudo /usr/bin/systemctl stop saibot.service");
         }, 1000);
     }
 

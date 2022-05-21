@@ -38,7 +38,7 @@ class SysCommands {
             options: [
                 {
                     name: "system",
-                    description: "should the image be big",
+                    description: "Saibot system commands",
                     type: ApplicationCommandOptionType.BOOLEAN,
                 },
             ],
@@ -50,7 +50,7 @@ class SysCommands {
     }
 
     execute(_msg, _commandline, BOT) {
-        // First of all let's check the access level
+        // First let's check the access level
         if (!BOT.internal.get("auth").isAdmin(_msg.author)) {
             return false;
         }
